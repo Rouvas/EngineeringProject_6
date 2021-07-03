@@ -9,6 +9,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import {HttpClientModule} from '@angular/common/http';
 import { HeaderComponent } from './modules/header/header.component';
 
+// Alerts module
+
 @NgModule({
   declarations: [
     AppComponent,
