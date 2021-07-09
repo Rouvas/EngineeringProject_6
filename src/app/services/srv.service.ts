@@ -338,7 +338,7 @@ async editOrganization(organization: Organization) {
   async delWorkPlace(workplace: Workplace) {
 
     const data = await this.http
-      .delete(`${this.link}/work_places/${workplace.id}` , {
+      .delete(`${this.link}/work_places/${workplace.id}/` , {
         headers: {
           Authorization: 'TOKEN 2cd1dc478c84a6abc1885804ba827d5ea9880aab'
         }

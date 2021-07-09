@@ -15,6 +15,13 @@ export class WorkplacesComponent implements OnInit {
   persons = [];
   workplaces = [];
 
+  // @ts-ignore
+  openworkplace = {
+    id: -1,
+    organization: -1,
+    name: '',
+    orgname: ''
+  };
 
   newworkplace: Workplace = {
     organization: 1,
@@ -50,9 +57,9 @@ export class WorkplacesComponent implements OnInit {
     }).then(() => {
       this.srv.getOrganizations().then(() =>
         (this.srv.organizations).forEach(organization => { this.organizations.push(organization);
-          for (let i of this.workplaces) {
-            // tslint:disable-next-line:use-isnan max-line-length
-            if (i.id === organization.id) { i.orgname = organization.name; }
+                                                           for (const i of this.workplaces) {
+                      // tslint:disable-next-line:use-isnan max-line-length
+                                    if (i.organization === organization.id) { i.orgname = organization.name; }
           }
 
 
@@ -67,6 +74,21 @@ export class WorkplacesComponent implements OnInit {
   addWorkPlace() {
    this.srv.addWorkPlace(this.newworkplace);
    window.location.reload();
+  }
+
+  deleteWorkplace(workplace) {
+    this.srv.delWorkPlace(workplace);
+    window.location.reload();
+  }
+
+  openWorkPlace(workplace) {
+    this.openworkplace = workplace;
+    console.log(this.openworkplace);
+  }
+
+  editWorkPlace(workplace) {
+    const obj: Workplace = {
+    }
   }
 
   onChange(value) {

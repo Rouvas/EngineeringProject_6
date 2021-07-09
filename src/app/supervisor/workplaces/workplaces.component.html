@@ -27,7 +27,7 @@
         <td>{{workplace.name}}</td>
         <td>{{workplace.orgname}}</td>
         <td>{{workplace.workers}}</td>
-        <td><button class="uk-button uk-button-default" type="button">Открыть</button></td>
+        <td><button class="uk-button uk-button-default" type="button" (click)="openWorkPlace(workplace)" uk-toggle="target: #modal-openworkplace">Открыть</button></td>
       </tr>
       </tbody>
     </table>
@@ -55,6 +55,35 @@
     <p class="uk-text-right">
       <button class="uk-button uk-button-default uk-modal-close" type="button">Назад</button>
       <button class="uk-button uk-button-primary" type="button" (click)="addWorkPlace()">Создать</button>
+    </p>
+  </div>
+</div>
+
+<!-- This is the modal -->
+<div id="modal-openworkplace" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title text-center">Просмотр рабочего места</h2>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">ID рабочего места</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" [(ngModel)]="openworkplace.id" disabled>
+    </div>
+    <legend class="uk-legend">Название</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите название рабочего места" [(ngModel)]="openworkplace.name">
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Организация</legend>
+    <div class="uk-margin">
+      <select class="uk-select" (change)="onChange($event.target.value)">
+        <option *ngFor="let i of organizations" [selected]="i.id == openworkplace.organization">{{i.name}}</option>
+      </select>
+    </div>
+    <p class="uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button">Назад</button>
+      <button class="uk-button uk-button-primary uk-modal-close" type="button">Изменить и сохранить</button>
+      <button class="uk-button uk-button-danger uk-modal-close" type="button" (click)="deleteWorkplace(openworkplace)">Удалить</button>
     </p>
   </div>
 </div>
