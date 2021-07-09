@@ -229,7 +229,7 @@ async editOrganization(organization: Organization) {
   async editPost(post: Post) {
 
     const data = await this.http
-      .put(`${this.link}/posts/${post.id}`, post , {
+      .put(`${this.link}/posts/${post.id}/`, post , {
         headers: {
           Authorization: 'TOKEN 2cd1dc478c84a6abc1885804ba827d5ea9880aab'
         }
@@ -243,7 +243,7 @@ async editOrganization(organization: Organization) {
 
   async addPost(post: Post) {
 
-    const data = await this.http
+    await this.http
       .post(`${this.link}/posts/`, post , {
         headers: {
           Authorization: 'TOKEN 2cd1dc478c84a6abc1885804ba827d5ea9880aab'
@@ -259,7 +259,7 @@ async editOrganization(organization: Organization) {
   async delPost(post: Post) {
 
     const data = await this.http
-      .delete(`${this.link}/persons/${post.id}` , {
+      .delete(`${this.link}/posts/${post.id}/` , {
         headers: {
           Authorization: 'TOKEN 2cd1dc478c84a6abc1885804ba827d5ea9880aab'
         }

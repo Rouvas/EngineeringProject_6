@@ -24,7 +24,7 @@
     <a href="" class="uk-navbar-item uk-logo">WorkTimer</a>
   </div>
 
-  <div class="uk-navbar-right no-print">
+  <div class="uk-navbar-right no-print" *ngIf="authstate === null">
 
     <ul class="uk-navbar-nav">
       <li>
@@ -34,6 +34,20 @@
             <li class="uk-nav-header">Вход в систему</li>
             <li><a routerLink="/worker/auth">Как сотрудник</a></li>
             <li><a routerLink="/auth">Как администратор</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="uk-navbar-right no-print" *ngIf="authstate != null">
+
+    <ul class="uk-navbar-nav">
+      <li>
+        <a href="#">{{authstate.email}}</a>
+        <div class="uk-navbar-dropdown">
+          <ul class="uk-nav uk-navbar-dropdown-nav">
+            <li (click)="onExit()"><a href="#">Выход из системы</a></li>
           </ul>
         </div>
       </li>
