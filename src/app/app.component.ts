@@ -17,9 +17,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   console.log(this.srv.getPersons());
-   console.log(this.srv.getPersonsbyid(1));
-   this.newUser();
+   // console.log(this.srv.getPersons());
+   // console.log(this.srv.getPersonsbyid(1));
+   // this.newUser();
   }
 
   newUser() {

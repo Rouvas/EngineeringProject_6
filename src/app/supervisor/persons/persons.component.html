@@ -1,0 +1,103 @@
+
+<div class="container-fluid">
+  <div class="col p-4">
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page"><a routerLink="/supervisor">Главная страница</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Управление сотрудниками</li>
+      </ol>
+    </nav>
+
+    <h3 style="margin: 0 auto; display: inline-block; ">Управление сотрудниками</h3>
+
+    <button class="uk-button uk-button-default" type="button" uk-toggle="target: #modal-addorganization" style="margin-left: 10px">Создать нового сотрудника</button>
+
+    <table class="uk-table uk-table-divider uk-table-hover">
+      <thead>
+      <tr>
+        <th>Ф.И.О.</th>
+        <th>Организация</th>
+        <th>Должность</th>
+        <th>Телефон</th>
+        <th>Статус</th>
+        <th>Действие</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let person of persons">
+        <td>{{person.last_name}} {{person.first_name}} {{person.middle_name}}</td>
+        <td>{{person.orgname}}</td>
+        <td>{{person.postname}}</td>
+        <td>{{person.phone}}</td>
+        <td>{{person.status}}</td>
+        <td><button class="uk-button uk-button-default" type="button">Открыть</button></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<!-- This is the modal -->
+<div id="modal-addorganization" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title text-center">Создание сотрудника</h2>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Организация</legend>
+    <div class="uk-margin">
+      <select class="uk-select">
+        <option>Option 01</option>
+        <option>Option 02</option>
+      </select>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Рабочее место</legend>
+    <div class="uk-margin">
+      <select class="uk-select">
+        <option>Option 01</option>
+        <option>Option 02</option>
+      </select>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Должность</legend>
+    <div class="uk-margin">
+      <select class="uk-select">
+        <option>Option 01</option>
+        <option>Option 02</option>
+      </select>
+    </div>
+    <legend class="uk-legend">Фамилия</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите фамилию">
+    </div>
+    <legend class="uk-legend">Имя</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите имя">
+    </div>
+    <legend class="uk-legend">Отчество</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите отчество">
+    </div>
+    <legend class="uk-legend">Телефон</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите номер телефона">
+    </div>
+    <legend class="uk-legend">Название</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите Email">
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Выберите статус</legend>
+    <div class="uk-margin">
+      <select class="uk-select">
+        <option>Option 01</option>
+        <option>Option 02</option>
+      </select>
+    </div>
+    <p class="uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button">Назад</button>
+      <button class="uk-button uk-button-primary" type="button">Создать</button>
+    </p>
+  </div>
+</div>
+

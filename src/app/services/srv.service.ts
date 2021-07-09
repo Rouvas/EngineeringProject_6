@@ -20,6 +20,17 @@ export class SrvService {
   // Link to RestAPI
   link = 'http://rouvas.ru/api/v1';
 
+
+
+// Work with Organization
+
+organizations = [];
+persons = [];
+worktimes = [];
+workplaces = [];
+organization = {};
+posts = [];
+
   // Persons
 
   // Persons of workplaces
@@ -34,7 +45,9 @@ export class SrvService {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+    // @ts-ignore
+    this.persons = data.results;
+
   }
 
   // Person by id of workplaces
@@ -49,7 +62,8 @@ export class SrvService {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+    return(data);
+
   }
 
   // Person by id of workplaces EDIT
@@ -64,7 +78,6 @@ export class SrvService {
       }, )
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
   }
 
   // Add new person to workplace
@@ -72,14 +85,14 @@ export class SrvService {
   async addPersonbyid(person: Person) {
 
     const data = await this.http
-      .post(`${this.link}/persons/`, person ,{
+      .post(`${this.link}/persons/`, person , {
         headers: {
           Authorization: 'TOKEN 2cd1dc478c84a6abc1885804ba827d5ea9880aab'
         }
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+
   }
 
   async delPersonbyid(person: Person) {
@@ -92,14 +105,8 @@ export class SrvService {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+
   }
-
-
-
-// Work with Organization
-
-
 // Get organizations
 
 async getOrganizations() {
@@ -107,12 +114,19 @@ async getOrganizations() {
     const data = await this.http
       .get(`${this.link}/organizations`, {
         headers: {
-          Authorization: 'TOKEN 2cd1dc478c84a6abc1885804ba827d5ea9880aab'
+          Authorization: 'TOKEN 2cd1dc478c84a6abc1885804ba827d5ea9880aab',
         }
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+
+    // @ts-ignore
+    this.organizations = data.results;
+
+
+
+    await this.getPersons();
+
   }
 
 // getOrganization by id
@@ -128,21 +142,26 @@ async getOrganization(id: number) {
       .toPromise().catch(error => { this.onError(error); });
 
     console.log(data);
+    // @ts-ignore
+    this.organization = data;
+    return data;
   }
 
 // editOrganization
 
 async editOrganization(organization: Organization) {
 
-    const data = await this.http
-      .put(`${this.link}/organizations/${organization.id}`, organization , {
+    const id = organization.id;
+    delete organization.id;
+    console.log(organization);
+
+    await this.http.put(`${this.link}/organizations/${id}/`, organization , {
         headers: {
           Authorization: 'TOKEN 2cd1dc478c84a6abc1885804ba827d5ea9880aab'
         }
       }, )
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
   }
 
 // Add organization by id
@@ -157,20 +176,18 @@ async editOrganization(organization: Organization) {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
   }
 
-  async delOrganization(organization: Organization) {
+  async delOrganization(id) {
 
-    const data = await this.http
-      .delete(`${this.link}/persons/${organization.id}` , {
+    await this.http
+      .delete(`${this.link}/organizations/${id}/` , {
         headers: {
           Authorization: 'TOKEN 2cd1dc478c84a6abc1885804ba827d5ea9880aab'
         }
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
   }
 
 // Должность
@@ -187,7 +204,9 @@ async editOrganization(organization: Organization) {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+    // @ts-ignore
+    this.posts = data.results;
+
   }
 
 // getPost by id
@@ -202,7 +221,7 @@ async editOrganization(organization: Organization) {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+
   }
 
 // editPost
@@ -217,7 +236,7 @@ async editOrganization(organization: Organization) {
       }, )
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+
   }
 
 // Add post by id
@@ -232,7 +251,7 @@ async editOrganization(organization: Organization) {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+
   }
 
 // Del post by id
@@ -247,7 +266,7 @@ async editOrganization(organization: Organization) {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+
   }
 
 // Рабочие места
@@ -264,7 +283,9 @@ async editOrganization(organization: Organization) {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+    // @ts-ignore
+    this.workplaces = data.results;
+
   }
 
 // getWorkPlace by id
@@ -279,7 +300,7 @@ async editOrganization(organization: Organization) {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+
   }
 
 // editWorkPlace
@@ -294,7 +315,7 @@ async editOrganization(organization: Organization) {
       }, )
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+
   }
 
 // Add workplace
@@ -309,7 +330,7 @@ async editOrganization(organization: Organization) {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+
   }
 
 // Del workplace by id
@@ -324,7 +345,7 @@ async editOrganization(organization: Organization) {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+
   }
 
 
@@ -343,7 +364,9 @@ async editOrganization(organization: Organization) {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+    // @ts-ignore
+    this.worktimes = data.results;
+
   }
 
 // getWorkTime by id
@@ -358,7 +381,7 @@ async editOrganization(organization: Organization) {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+
   }
 
 // editWorkTime
@@ -373,7 +396,7 @@ async editOrganization(organization: Organization) {
       }, )
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+
   }
 
 // Add worktime
@@ -388,7 +411,6 @@ async editOrganization(organization: Organization) {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
   }
 
 // Del worktime by id
@@ -403,7 +425,7 @@ async editOrganization(organization: Organization) {
       })
       .toPromise().catch(error => { this.onError(error); });
 
-    console.log(data);
+
   }
 
 

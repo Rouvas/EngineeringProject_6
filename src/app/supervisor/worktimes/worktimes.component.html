@@ -1,0 +1,73 @@
+
+<div class="container-fluid">
+
+  <div class="col p-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page"><a routerLink="/supervisor">Главная страница</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Управление рабочим временем</li>
+      </ol>
+    </nav>
+
+    <h3 style="margin: 0 auto; display: inline-block; ">Управление рабочим временем</h3>
+
+    <button class="uk-button uk-button-default" type="button" uk-toggle="target: #modal-addorganization" style="margin-left: 10px">Создать новое время</button>
+
+    <table class="uk-table uk-table-divider uk-table-hover">
+      <thead>
+      <tr>
+        <th>Ф.И.О</th>
+        <th>Дата и время начала работы</th>
+        <th>Дата и время окончания работы</th>
+        <th>Действие</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let worktime of worktimes">
+        <td>{{worktime.cred}}</td>
+        <td>{{worktime.start_from}}</td>
+        <td>{{worktime.ended_at}}</td>
+        <td><button class="uk-button uk-button-default" type="button">Открыть</button></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<!-- This is the modal -->
+<div id="modal-addorganization" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title text-center">Добавление рабочего времени</h2>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Выберите организацию</legend>
+    <div class="uk-margin">
+      <select class="uk-select">
+        <option>Option 01</option>
+        <option>Option 02</option>
+      </select>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Выберите сотрудника</legend>
+    <div class="uk-margin">
+      <select class="uk-select">
+        <option>Option 01</option>
+        <option>Option 02</option>
+      </select>
+    </div>
+    <legend class="uk-legend">Название</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите название должности">
+    </div>
+    <p class="uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button">Назад</button>
+      <button class="uk-button uk-button-primary" type="button">Создать</button>
+    </p>
+
+  </div>
+
+
+
+
+</div>

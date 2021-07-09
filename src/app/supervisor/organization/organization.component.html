@@ -1,0 +1,101 @@
+
+<div class="container-fluid">
+  <div class="col p-4">
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page"><a routerLink="/supervisor">Главная страница</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Управление организациями</li>
+      </ol>
+    </nav>
+
+    <h3 style="margin: 0 auto; display: inline-block; ">Управление организациями</h3>
+
+    <button class="uk-button uk-button-default" type="button" uk-toggle="target: #modal-addorganization" style="margin-left: 10px">Создать новую организацию</button>
+
+    <table class="uk-table uk-table-divider uk-table-hover">
+      <thead>
+      <tr>
+        <th>Название</th>
+        <th>Номер телефона</th>
+        <th>Количество сотрудников</th>
+        <th>Действие</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let organization of organizations">
+        <td>{{organization.name}}</td>
+        <td>{{organization.phone}}</td>
+        <td>{{organization.workers}}</td>
+        <td><button class="uk-button uk-button-default" type="button" uk-toggle="target: #modal-openorganization" (click)="openOrganization(organization.id)">Открыть</button></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+
+
+
+<!-- This is the modal -->
+<div id="modal-addorganization" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title">Добавление новой организации</h2>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Владелец организации</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Выберите владельца" value="Supervisor" disabled>
+    </div>
+    <legend class="uk-legend">Название</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите название организации" [(ngModel)]="neworganization.name">
+    </div>
+    <legend class="uk-legend">Телефон</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите номер телефона" [(ngModel)]="neworganization.phone">
+    </div>
+    <p class="uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button">Назад</button>
+      <button class="uk-button uk-button-primary" type="button" (click)="addOrganization()">Создать</button>
+    </p>
+  </div>
+</div>
+
+
+<!-- This is the modal -->
+<div id="modal-openorganization" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title text-center">Просмотр организации</h2>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">ID организации</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" [(ngModel)]="openorganization['id']" disabled>
+    </div>
+    <legend class="uk-legend">Название организации</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите название организации" [(ngModel)]="openorganization['name']">
+    </div>
+    <legend class="uk-legend">Номер телефона</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Выберите номер телефона" [(ngModel)]="openorganization['phone']">
+    </div>
+    <legend class="uk-legend">Количество работников</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" [(ngModel)]="openorganization['workers']" disabled>
+    </div>
+    <legend class="uk-legend">Владелец</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Выберите владельца" value="Supervisor" disabled>
+    </div>
+    <p class="uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button">Назад</button>
+      <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="editOrganization()">Изменить и сохранить</button>
+      <button class="uk-button uk-button-danger uk-modal-close" type="button" (click)="delOrganizaton()">Удалить</button>
+    </p>
+  </div>
+</div>
