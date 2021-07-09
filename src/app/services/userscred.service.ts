@@ -7,24 +7,24 @@ export class UserscredService {
 
   constructor() { }
 
-  supervisor: object = {
-    email: 'supervisor@admin.com',
-    password: 'admin',
-  };
-
-  admin: object = {
-    email: 'admin@admin.com',
-    password: 'admin',
-  };
-
-  moder: object = {
-    email: 'admin@admin.com',
-    password: 'admin'
-  };
-
-  user: object = {
-    email: 'user@admin.com',
-    password: 'admin'
-  };
+  credentials = [
+    {
+      email: 'supervisor@admin.com',
+      password: 'admin',
+      role: 2,
+    },
+    {
+      email: 'admin@admin.com',
+      password: 'admin',
+      organization: 1,
+      role: 1,
+    },
+    {
+      email: 'moder@admin.com',
+      password: 'admin',
+      organization: 1,
+      role: 0,
+    }
+  ];
 
 }

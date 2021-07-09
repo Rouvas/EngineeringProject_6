@@ -13,23 +13,17 @@
             <form class="needs-validation" novalidate="" autocomplete="off">
               <div class="mb-3">
                 <label class="mb-2 text-muted" for="email">E-Mail</label>
-                <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
-                <div class="invalid-feedback">
-                  Email is invalid
-                </div>
+                <input id="email" type="email" class="form-control" name="email" value="" required autofocus [(ngModel)]="credentials.email">
               </div>
 
               <div class="mb-3">
                 <div class="mb-2 w-100">
                   <label class="text-muted" for="password">Пароль</label>
-                  <a href="forgot.html" class="float-end">
+                  <a style="color: #0e6dcd" (click)="newAlert()" class="float-end">
                     Забыли пароль?
                   </a>
                 </div>
-                <input id="password" type="password" class="form-control" name="password" required>
-                <div class="invalid-feedback">
-                  Password is required
-                </div>
+                <input id="password" type="password" class="form-control" name="password" required [(ngModel)]="credentials.password">
               </div>
 
               <div class="d-flex align-items-center">
@@ -47,3 +41,5 @@
 </section>
 
 <script src="js/login.js"></script>
+
+<button (click)="onCheck()">Clico</button>

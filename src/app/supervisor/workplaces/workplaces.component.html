@@ -76,13 +76,13 @@
     </div>
     <legend class="uk-legend" style="margin-top:15px">Организация</legend>
     <div class="uk-margin">
-      <select class="uk-select" (change)="onChange($event.target.value)">
+      <select class="uk-select" (change)="onChangeEdit($event.target.value)">
         <option *ngFor="let i of organizations" [selected]="i.id == openworkplace.organization">{{i.name}}</option>
       </select>
     </div>
     <p class="uk-text-right">
       <button class="uk-button uk-button-default uk-modal-close" type="button">Назад</button>
-      <button class="uk-button uk-button-primary uk-modal-close" type="button">Изменить и сохранить</button>
+      <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="editWorkPlace()">Изменить и сохранить</button>
       <button class="uk-button uk-button-danger uk-modal-close" type="button" (click)="deleteWorkplace(openworkplace)">Удалить</button>
     </p>
   </div>
