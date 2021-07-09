@@ -86,16 +86,26 @@ export class WorkplacesComponent implements OnInit {
     console.log(this.openworkplace);
   }
 
-  editWorkPlace(workplace) {
+  editWorkPlace() {
     const obj: Workplace = {
-    }
+      name: this.openworkplace.name,
+      organization: this.openworkplace.organization,
+      id: this.openworkplace.id
+    };
+    this.srv.editWorkPlace(obj);
+    window.location.reload();
   }
 
   onChange(value) {
     for (const i of this.organizations) {
-      if (i.name === value) {console.log('Совпадение'); this.newworkplace.organization = i.id}
+      if (i.name === value) {console.log('Совпадение'); this.newworkplace.organization = i.id; }
     }
-    console.log(this.newworkplace);
+  }
+
+  onChangeEdit(value) {
+    for (const i of this.organizations) {
+      if (i.name === value) {console.log('Совпадение'); this.openworkplace.organization = i.id; }
+    }
   }
 
 

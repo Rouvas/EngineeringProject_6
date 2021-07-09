@@ -307,8 +307,8 @@ async editOrganization(organization: Organization) {
 
   async editWorkPlace(workplace: Workplace) {
 
-    const data = await this.http
-      .put(`${this.link}/work_places/${workplace.id}`, workplace , {
+     await this.http
+      .put(`${this.link}/work_places/${workplace.id}/`, workplace , {
         headers: {
           Authorization: 'TOKEN 2cd1dc478c84a6abc1885804ba827d5ea9880aab'
         }
