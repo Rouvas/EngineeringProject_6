@@ -1,5 +1,5 @@
 export class Worktime {
-  public id: number;
+  public id?: number;
   // tslint:disable-next-line:variable-name
   public start_from: string;
   // tslint:disable-next-line:variable-name

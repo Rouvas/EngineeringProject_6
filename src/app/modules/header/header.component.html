@@ -1,69 +1,59 @@
-<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<!--  <div class="container-fluid">-->
-<!--    <a class="navbar-brand" href="#">&#8986; WorkTimer</a>-->
-<!--    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--      <span class="navbar-toggler-icon"></span>-->
-<!--    </button>-->
-<!--    <div class="collapse navbar-collapse" id="navbarText">-->
-<!--      <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link active" aria-current="page" href="#">Home</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" href="#">Features</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" href="#">Pricing</a>-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--      <span class="navbar-text">-->
-<!--        Войти-->
-<!--      </span>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</nav>-->
 
 
 <nav class="uk-navbar-container" uk-navbar>
-  <div class="uk-navbar-left">
+  <div class="uk-navbar-left no-print">
 
     <ul class="uk-navbar-nav">
-      <li class="uk-active"><a href="#">Active</a></li>
       <li>
-        <a href="#">Parent</a>
+        <a class="uk-navbar-toggle" href=""><span uk-icon="search"></span>
+        </a>
         <div class="uk-navbar-dropdown">
           <ul class="uk-nav uk-navbar-dropdown-nav">
-            <li class="uk-active"><a href="#">Active</a></li>
-            <li><a href="#">Item</a></li>
-            <li class="uk-nav-header">Header</li>
-            <li><a href="#">Item</a></li>
-            <li><a href="#">Item</a></li>
-            <li class="uk-nav-divider"></li>
-            <li><a href="#">Item</a></li>
+
+            <li><a>Изменение размера шрифта</a></li>
+            <li><a href="javascript:ts('body',1)">Больше</a></li>
+            <li><a href="javascript:ts('body',-1)">Меньше</a></li>
           </ul>
         </div>
       </li>
-      <li><a href="#">Item</a></li>
     </ul>
 
   </div>
-  <div class="uk-navbar-right">
+
+  <div class="uk-navbar-center">
+    <a href="" class="uk-navbar-item uk-logo">WorkTimer</a>
+  </div>
+
+  <div class="uk-navbar-right no-print">
 
     <ul class="uk-navbar-nav">
       <li>
-        <a href="#">Parent</a>
+        <a href="#">Войти</a>
         <div class="uk-navbar-dropdown">
           <ul class="uk-nav uk-navbar-dropdown-nav">
-            <li class="uk-active"><a href="#">Active</a></li>
-            <li><a href="#">Item</a></li>
-            <li class="uk-nav-header">Header</li>
-            <li><a href="#">Item</a></li>
-            <li><a href="#">Item</a></li>
-            <li class="uk-nav-divider"></li>
-            <li><a href="#">Item</a></li>
+            <li class="uk-nav-header">Вход в систему</li>
+            <li><a routerLink="/worker/auth">Как сотрудник</a></li>
+            <li><a routerLink="/auth">Как администратор</a></li>
           </ul>
         </div>
       </li>
     </ul>
   </div>
 </nav>
+
+<!-- This is the modal -->
+<div id="modal-login" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title text-center">Вход в систему</h2>
+    </div>
+
+
+    <div class="uk-margin" style="display: grid">
+      <button class="uk-button uk-button-default uk-button-large uk-modal-close" routerLink="/worker/auth">Войти как сотрудник</button>
+      <button class="uk-button uk-button-default uk-button-large uk-modal-close" routerLink="/auth">Войти как администратор</button>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<div class="container-fluid">
+  <div class="col p-4">
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb no-print">
+        <li class="breadcrumb-item active" aria-current="page"><a routerLink="/worker/auth">Страница входа</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Сотрудник {{person.last_name}} {{person.first_name.charAt(0)}}.</li>
+      </ol>
+    </nav>
+    <div uk-alert class="no-print">
+      <a class="uk-alert-close" uk-close></a>
+      <p>Данная страница доступна для печати, выберите в меню браузера "печать".</p>
+    </div>
+    <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+      <div>
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3 class="uk-card-title">Личные данные</h3>
+          <p>Фамилия: {{person.last_name}} <br> Имя: {{person.first_name}} <br> Отчество: {{person.middle_name}} <br>Дата рождения: {{person.birth_date}}</p>
+        </div>
+      </div>
+      <div>
+        <div class="uk-card uk-card-default uk-card-body no-print">
+          <h3 class="uk-card-title">Контактные данные</h3>
+          <p>Телефон: {{person.phone}} <br> Почта: {{person.email}}</p>
+        </div>
+      </div>
+      <div>
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3 class="uk-card-title">Рабочая информация</h3>
+          <p>Организация: {{personinfo['organization']}} <br> Рабочее место: {{personinfo['work_place']}} <br> Должность: {{personinfo['post']}} <br> Статус: {{person.status}}</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <h3 class="no-print" style="margin: 0 auto; display: inline-block; ">Управление рабочим временем</h3>
+
+    <button class="uk-button uk-button-default no-print" type="button" uk-toggle="target: #modal-addorganization" style="margin-left: 10px">Добавить новое время</button>
+
+    <table class="uk-table uk-table-divider uk-table-hover">
+      <thead>
+      <tr>
+        <th>Дата и время начала работы</th>
+        <th>Дата и время окончания работы</th>
+        <th class="no-print">Действие</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let worktime of worktimes">
+        <td>{{worktime.start_from}}</td>
+        <td>{{worktime.ended_at}}</td>
+        <td class="no-print"><button class="uk-button uk-button-default"  uk-toggle="target: #modal-opentime" (click)="openTime(worktime.id)"  type="button">Открыть</button></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<!-- This is the modal -->
+<div id="modal-addorganization" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title text-center">Добавление нового времени</h2>
+    </div>
+    <legend class="uk-legend" style="margin-top: 15px">Начало работы</legend>
+    <div class="uk-margin">
+      <owl-date-time-inline [(ngModel)]="start_from"></owl-date-time-inline>
+    </div>
+    <legend class="uk-legend">Окончание работы</legend>
+    <div class="uk-margin">
+      <owl-date-time-inline [(ngModel)]="ended_at"></owl-date-time-inline>
+    </div>
+    <p class="uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button">Назад</button>
+      <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="addTime()">Добавить</button>
+    </p>
+  </div>
+</div>
+
+<!-- This is the modal -->
+<div id="modal-opentime" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title text-center">Просмотр времени</h2>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Начало работы</legend>
+    <div class="uk-margin">
+     <p>{{opentime.start_from}}</p>
+    </div>
+    <legend class="uk-legend">Окончание работы</legend>
+    <div class="uk-margin">
+      <p>{{opentime.ended_at}}</p>
+    </div>
+    <p class="uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button">Назад</button>
+    </p>
+  </div>
+</div>
