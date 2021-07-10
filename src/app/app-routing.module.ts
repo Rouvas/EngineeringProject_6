@@ -18,6 +18,7 @@ import {AdminpersonsComponent} from './admin/adminpersons/adminpersons.component
 import {ModerdashboardComponent} from './moderator/moderdashboard/moderdashboard.component';
 import {ModerworktimesComponent} from './moderator/moderworktimes/moderworktimes.component';
 import {ModerpersonsComponent} from './moderator/moderpersons/moderpersons.component';
+import {AdminworktimesComponent} from './admin/adminworktimes/adminworktimes.component';
 
 
 const routes: Routes = [
@@ -37,7 +38,7 @@ const routes: Routes = [
   {path: 'administrator/posts', component: AdminpostsComponent},
   {path: 'administrator/workplaces', component: AdminworkplacesComponent},
   {path: 'administrator/persons', component: AdminpersonsComponent},
-  {path: 'administrator/worktimes', component: AdminworkplacesComponent},
+  {path: 'administrator/worktimes', component: AdminworktimesComponent},
   // Модератор
   {path: 'moderator', component: ModerdashboardComponent},
   {path: 'moderator/persons', component: ModerpersonsComponent},

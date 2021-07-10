@@ -1,1 +1,102 @@
-<p>adminposts works!</p>
+
+<div class="container-fluid">
+  <div class="col p-4">
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page"><a routerLink="/administrator">Главная страница</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Управление должностями</li>
+      </ol>
+    </nav>
+
+    <h3 style="margin: 0 auto; display: inline-block; ">Управление должностями</h3>
+
+    <button class="uk-button uk-button-default" type="button" uk-toggle="target: #modal-addorganization" style="margin-left: 10px" (click)="onOpen()">Создать новую должность</button>
+
+    <table class="uk-table uk-table-divider uk-table-hover">
+      <thead>
+      <tr>
+        <th>Название</th>
+        <th>Рабочий кампус (место)</th>
+        <th>Организация</th>
+        <th>Действие</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let post of posts">
+        <td>{{post.name}}</td>
+        <td>{{post.workplace}}</td>
+        <td>{{post.orgname}}</td>
+        <td><button class="uk-button uk-button-default" type="button" (click)="onOpenPost(post)" uk-toggle="target: #modal-openpost">Открыть</button></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+
+<!-- This is the modal -->
+<div id="modal-addorganization" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title text-center">Добавление должности</h2>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Выберите организацию</legend>
+    <div class="uk-margin">
+      <select class="uk-select" (change)="onChangeAdd($event.target.value)">
+        <option *ngFor="let i of organizations">{{i.name}}</option>
+      </select>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Выберите рабочее место (кампус)</legend>
+    <div class="uk-margin">
+      <select class="uk-select" (change)="onChangeAdd2($event.target.value)">
+        <option *ngFor="let i of filteredworkplaces">{{i.name}}</option>
+      </select>
+    </div>
+    <legend class="uk-legend">Название</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите название должности" [(ngModel)]="newpost.name">
+    </div>
+    <p class="uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button">Назад</button>
+      <button class="uk-button uk-button-primary" type="button" (click)="onAddPost();">Создать</button>
+    </p>
+  </div>
+</div>
+
+<!-- This is the modal -->
+<div id="modal-openpost" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close (click)="close()"></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title text-center">Просмотр должности</h2>
+    </div>
+    <legend class="uk-legend">ID должности</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" [(ngModel)]="openpost.id" disabled>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Организация</legend>
+    <div class="uk-margin">
+      <select class="uk-select" (change)="onChangeEdit($event.target.value)">
+        <option *ngFor="let i of organizations" [selected]="i.id === openpost.organization">{{i.name}}</option>
+      </select>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Выберите рабочее место (кампус)</legend>
+    <div class="uk-margin">
+      <select class="uk-select" (change)="onChangeEdit2($event.target.value)">
+        <option *ngFor="let i of filteredworkplaces" [selected]="i.id === openpost.work_place">{{i.name}}</option>
+      </select>
+    </div>
+    <legend class="uk-legend">Название</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите название должности" [(ngModel)]="openpost.name">
+    </div>
+    <p class="uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button" (click)="close()">Назад</button>
+      <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="editPost()">Изменить и сохранить</button>
+      <button class="uk-button uk-button-danger uk-modal-close" type="button" (click)="deletePost(openpost)">Удалить</button>
+    </p>
+  </div>
+</div>

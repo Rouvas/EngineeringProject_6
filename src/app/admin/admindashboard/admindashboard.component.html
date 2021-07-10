@@ -1,1 +1,57 @@
-<p>admindashboard works!</p>
+
+<div class="container-fluid">
+  <div class="col p-4">
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Главная страница</li>
+      </ol>
+    </nav>
+
+    <h3 style="margin: 0 auto">Меню администратора</h3>
+
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="workplaces">Управление рабочими местами</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="posts">Управление должностями</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="persons">Управление сотрудниками</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="worktimes">Управление рабочим временем</a>
+      </li>
+    </ul>
+
+    <h3 class="headertext">Dashboard</h3>
+
+
+    <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+      <div>
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3 class="uk-card-title">Ваша компания</h3>
+          <p>Название компании <b>{{c1[0].name}}</b></p>
+          <p>Номер телефона <b>{{c1[0].phone}}</b></p>
+        </div>
+      </div>
+      <div>
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3 class="uk-card-title">Количество сотрудников</h3>
+          <p>Внесено <b>{{c2.length}}</b>  сотрудников</p>
+        </div>
+      </div>
+      <div>
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3 class="uk-card-title">Количество записей времени</h3>
+          <p>Внесено <b>{{c3.length}}</b> записи</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
