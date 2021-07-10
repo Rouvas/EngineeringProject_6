@@ -418,7 +418,7 @@ async editOrganization(organization: Organization) {
   async delWorkTime(worktime: Worktime) {
 
     const data = await this.http
-      .delete(`${this.link}/work_times/${worktime.id}` , {
+      .delete(`${this.link}/work_times/${worktime.id}/` , {
         headers: {
           Authorization: 'TOKEN 2cd1dc478c84a6abc1885804ba827d5ea9880aab'
         }
