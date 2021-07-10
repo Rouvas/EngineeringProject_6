@@ -17,7 +17,7 @@ export class PersonsComponent implements OnInit {
   posts = [];
 
   // tslint:disable-next-line:variable-name
-  private birth_date = new Date();
+  public birth_date = new Date();
 
   addperson = {
     id: -1,
