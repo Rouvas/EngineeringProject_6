@@ -71,7 +71,7 @@ posts = [];
   async editPersonbyid(person: Person) {
 
     const data = await this.http
-      .put(`${this.link}/persons/${person.id}`, person , {
+      .put(`${this.link}/persons/${person.id}/`, person , {
         headers: {
           Authorization: 'TOKEN 2cd1dc478c84a6abc1885804ba827d5ea9880aab'
         }
@@ -82,7 +82,7 @@ posts = [];
 
   // Add new person to workplace
 
-  async addPersonbyid(person: Person) {
+  async addPerson(person: Person) {
 
     const data = await this.http
       .post(`${this.link}/persons/`, person , {
