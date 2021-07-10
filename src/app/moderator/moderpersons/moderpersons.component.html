@@ -1,1 +1,174 @@
-<p>moderpersons works!</p>
+
+<div class="container-fluid">
+  <div class="col p-4">
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page"><a routerLink="/moderator">Главная страница</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Управление сотрудниками</li>
+      </ol>
+    </nav>
+
+    <h3 style="margin: 0 auto; display: inline-block; ">Управление сотрудниками</h3>
+
+    <button class="uk-button uk-button-default" type="button" uk-toggle="target: #modal-addorganization" style="margin-left: 10px" (click)="onOpenAdd()">Создать нового сотрудника</button>
+
+    <table class="uk-table uk-table-divider uk-table-hover">
+      <thead>
+      <tr>
+        <th>Ф.И.О.</th>
+        <th>Организация</th>
+        <th>Должность</th>
+        <th>Телефон</th>
+        <th>Статус</th>
+        <th>Действие</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let person of persons">
+        <td>{{person.last_name}} {{person.first_name}} {{person.middle_name}}</td>
+        <td>{{person.orgname}}</td>
+        <td>{{person.postname}}</td>
+        <td>{{person.phone}}</td>
+        <td>{{person.status}}</td>
+        <td><button class="uk-button uk-button-default" type="button" uk-toggle="target: #modal-editperson" (click)="openPerson(person)">Открыть</button></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<!-- This is the modal -->
+<div id="modal-addorganization" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title text-center">Создание сотрудника</h2>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Организация</legend>
+    <div class="uk-margin">
+      <select class="uk-select" (change)="onChangeAdd($event.target.value)">
+        <option *ngFor="let i of organizations">{{i.name}}</option>
+      </select>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Рабочее место</legend>
+    <div class="uk-margin">
+      <select class="uk-select" (change)="onChangeAdd2($event.target.value)">
+        <option *ngFor="let i of filteredworkplaces">{{i.name}}</option>
+      </select>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Должность</legend>
+    <div class="uk-margin">
+      <select class="uk-select" (change)="onChangeAdd3($event.target.value)">
+        <option *ngFor="let i of filteredposts">{{i.name}}</option>
+      </select>
+    </div>
+    <legend class="uk-legend">Фамилия</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите фамилию" [(ngModel)]="addperson.last_name">
+    </div>
+    <legend class="uk-legend">Имя</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите имя" [(ngModel)]="addperson.first_name">
+    </div>
+    <legend class="uk-legend">Отчество</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите отчество" [(ngModel)]="addperson.middle_name">
+    </div>
+    <legend class="uk-legend">Телефон</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите номер телефона" [(ngModel)]="addperson.phone">
+    </div>
+    <legend class="uk-legend">Email</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите Email" [(ngModel)]="addperson.email">
+    </div>
+    <legend class="uk-legend" style="margin-top: 15px">Дата рождения</legend>
+    <div class="uk-margin">
+      <owl-date-time-inline [pickerType]="'calendar'" [(ngModel)]="birth_date"></owl-date-time-inline>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Выберите статус</legend>
+    <div class="uk-margin">
+      <select class="uk-select" [(ngModel)]="addperson.status">
+        <option>Работает</option>
+        <option>В отпуске</option>
+        <option>Не работает</option>
+      </select>
+    </div>
+    <p class="uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button">Назад</button>
+      <button class="uk-button uk-button-primary" type="button" (click)="onAddPerson()">Создать</button>
+    </p>
+  </div>
+</div>
+
+
+<!-- This is the modal -->
+<div id="modal-editperson" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-modal-header">
+      <h2 class="uk-modal-title text-center">Просмотр сотрудника</h2>
+    </div>
+    <legend class="uk-legend">ID сотрудника</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите фамилию" [(ngModel)]="openedPerson.id" disabled>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Организация</legend>
+    <div class="uk-margin">
+      <select class="uk-select" (change)="onChangeEdit($event.target.value)">
+        <option *ngFor="let i of organizations" [selected]="i.id === openedPerson.organization">{{i.name}}</option>
+      </select>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Рабочее место</legend>
+    <div class="uk-margin">
+      <select class="uk-select" (change)="onChangeEdit2($event.target.value)">
+        <option *ngFor="let i of filteredworkplaces" [selected]="i.id === openedPerson.work_place">{{i.name}}</option>
+      </select>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Должность</legend>
+    <div class="uk-margin">
+      <select class="uk-select" (change)="onChangeEdit3($event.target.value)">
+        <option *ngFor="let i of filteredposts" [selected]="i.id === openedPerson.post">{{i.name}}</option>
+      </select>
+    </div>
+    <legend class="uk-legend">Фамилия</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите фамилию" [(ngModel)]="openedPerson.last_name">
+    </div>
+    <legend class="uk-legend">Имя</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите имя" [(ngModel)]="openedPerson.first_name">
+    </div>
+    <legend class="uk-legend">Отчество</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите отчество" [(ngModel)]="openedPerson.middle_name">
+    </div>
+    <legend class="uk-legend">Телефон</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите номер телефона" [(ngModel)]="openedPerson.phone">
+    </div>
+    <legend class="uk-legend">Email</legend>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Введите Email" [(ngModel)]="openedPerson.email">
+    </div>
+    <legend class="uk-legend" style="margin-top: 15px">Дата рождения</legend>
+    <div class="uk-margin">
+      <owl-date-time-inline [pickerType]="'calendar'" [(ngModel)]="birth_date"></owl-date-time-inline>
+    </div>
+    <legend class="uk-legend" style="margin-top:15px">Выберите статус</legend>
+    <div class="uk-margin">
+      <select class="uk-select" [(ngModel)]="openedPerson.status">
+        <option>Работает</option>
+        <option>В отпуске</option>
+        <option>Не работает</option>
+      </select>
+    </div>
+    <p class="uk-text-right">
+      <button class="uk-button uk-button-default uk-modal-close" type="button" (click)="close()">Назад</button>
+      <button class="uk-button uk-button-primary uk-modal-close" type="button" (click)="editPerson()">Изменить и сохранить</button>
+      <button class="uk-button uk-button-danger uk-modal-close" type="button" (click)="deletePerson(openedPerson)">Удалить</button>
+    </p>
+  </div>
+</div>

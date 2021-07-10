@@ -37,6 +37,8 @@ import { AdminpersonsComponent } from './admin/adminpersons/adminpersons.compone
 import { AdminworktimesComponent } from './admin/adminworktimes/adminworktimes.component';
 import { ModerworktimesComponent } from './moderator/moderworktimes/moderworktimes.component';
 import { ModerpersonsComponent } from './moderator/moderpersons/moderpersons.component';
+import { AdmindashboardComponent } from './admin/admindashboard/admindashboard.component';
+import { ModerdashboardComponent } from './moderator/moderdashboard/moderdashboard.component';
 
 
 
@@ -64,6 +66,8 @@ import { ModerpersonsComponent } from './moderator/moderpersons/moderpersons.com
     AdminworktimesComponent,
     ModerworktimesComponent,
     ModerpersonsComponent,
+    AdmindashboardComponent,
+    ModerdashboardComponent,
   ],
   imports: [
     BrowserModule,

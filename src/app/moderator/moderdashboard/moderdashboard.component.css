@@ -19,6 +19,11 @@
   border-radius: .25rem;
 }
 
+.a {
+  color: #0d6efd;
+  text-decoration: underline;
+}
+
 .headertext{
   margin-top: 20px
 }

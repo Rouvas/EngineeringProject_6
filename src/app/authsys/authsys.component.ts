@@ -9,7 +9,8 @@ import { UserscredService } from '../services/userscred.service';
 })
 export class AuthsysComponent implements OnInit {
 
-  constructor(private notifications: NotificationsService, private auth: UserscredService) { }
+  constructor(private notifications: NotificationsService, private auth: UserscredService) {
+  }
 
   credentials = {
     email: '',
@@ -36,9 +37,19 @@ export class AuthsysComponent implements OnInit {
     for (const auth of this.auth.credentials) {
       // tslint:disable-next-line:max-line-length
       if (auth.email === this.credentials.email && auth.password === this.credentials.password) {
-        localStorage.setItem('auth', JSON.stringify(auth)); error = 1;
-        if (auth.role === 2) {window.location.replace('/supervisor'); }
+        localStorage.setItem('auth', JSON.stringify(auth));
+        error = 1;
+        if (auth.role === 2) {
+          window.location.replace('/supervisor');
+        }
+        if (auth.role === 1) {
+          window.location.replace('/administrator');
+        }
+        if (auth.role === 0) {
+          window.location.replace('/moderator');
+        }
       }
+
     }
     if (error === 0) {
       // @ts-ignore
@@ -53,7 +64,7 @@ export class AuthsysComponent implements OnInit {
   }
 
   onCheck() {
-    console.log(JSON.parse( localStorage.getItem('auth') as string));
+    console.log(JSON.parse(localStorage.getItem('auth') as string));
   }
 
 }
