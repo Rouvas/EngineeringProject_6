@@ -37,7 +37,7 @@ export class AuthsysComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       if (auth.email === this.credentials.email && auth.password === this.credentials.password) {
         localStorage.setItem('auth', JSON.stringify(auth)); error = 1;
-        if (auth.role === 2) {window.location.replace('/supervisor') }
+        if (auth.role === 2) {window.location.replace('/supervisor'); }
       }
     }
     if (error === 0) {
