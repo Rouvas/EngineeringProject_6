@@ -16,14 +16,20 @@
     <table class="uk-table uk-table-divider uk-table-hover">
       <thead>
       <tr>
-        <th>Название</th>
-        <th>Рабочий кампус (место)</th>
-        <th>Организация</th>
+        <th>Название  <a (click)="useSortingName()">⇅</a></th>
+        <th>Рабочий кампус (место)  <a (click)="useSortingWorkplace()">⇅</a></th>
+        <th>Организация  <a (click)="useSortingOrganization()">⇅</a></th>
         <th>Действие</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let post of posts">
+      <tr>
+        <td><input class="uk-input" type="text" placeholder="Фильтрация по названию" [(ngModel)]="componentFilter.name"></td>
+        <td><input class="uk-input" type="text" placeholder="Фильтрация по рабочему месту" [(ngModel)]="componentFilter.workplace"></td>
+        <td><input class="uk-input" type="text" placeholder="Фильтрация по организации" [(ngModel)]="componentFilter.orgname"></td>
+        <td></td>
+      </tr>
+      <tr *ngFor="let post of posts | filterBy: componentFilter">
         <td>{{post.name}}</td>
         <td>{{post.workplace}}</td>
         <td>{{post.orgname}}</td>

@@ -17,6 +17,8 @@ export class AdminpersonsComponent implements OnInit {
   workplaces = [];
   posts = [];
 
+  componentFilter: any = { first_name: '', orgname: '', postname: '', phone: '' };
+
   // tslint:disable-next-line:variable-name
   public birth_date = new Date();
 
@@ -56,6 +58,104 @@ export class AdminpersonsComponent implements OnInit {
     work_place: -1,
     work_place_name: '',
   };
+
+
+  sorting = false;
+
+  sorting2 = false;
+
+  sorting3 = false;
+
+  sorting4 = false;
+
+  useSortingName(){
+    if (this.sorting === false){
+      this.sorting = true;
+      this.persons.sort((prev, next ) => {
+        if (prev.first_name < next.first_name) return -1;
+        else if (prev.first_name > next.first_name) return 1;
+        else return 0;
+      });
+
+    }
+    else if (this.sorting == true){
+      this.sorting = false;
+      this.persons.sort((prev,next) =>{
+        if (prev.first_name > next.first_name) return -1;
+        else if (prev.first_name < next.first_name) return 1;
+        else return 0;
+
+      });
+
+    }
+  }
+
+  useSortingPost() {
+    if (this.sorting2 === false){
+      this.sorting2 = true;
+      this.persons.sort((prev, next ) => {
+        if (prev.postname < next.postname) return -1;
+        else if (prev.postname > next.postname) return 1;
+        else return 0;
+      });
+
+    }
+    else if (this.sorting === true){
+      this.sorting2 = false;
+      this.persons.sort((prev,next) =>{
+        if (prev.postname > next.postname) return -1;
+        else if (prev.postname < next.postname) return 1;
+        else return 0;
+
+      });
+
+    }
+  }
+
+  useSortingOrganization(){
+    if (this.sorting3 === false){
+      this.sorting3 = true;
+      this.persons.sort((prev, next ) => {
+        if (prev.orgname < next.orgname) return -1;
+        else if (prev.orgname > next.orgname) return 1;
+        else return 0;
+      });
+
+    }
+    else if (this.sorting == true){
+      this.sorting = false;
+      this.persons.sort((prev,next) =>{
+        if (prev.orgname > next.orgname) return -1;
+        else if (prev.orgname < next.orgname) return 1;
+        else return 0;
+
+      });
+
+    }
+  }
+
+  useSortingStatus(){
+    if (this.sorting3 === false){
+      this.sorting3 = true;
+      this.persons.sort((prev, next ) => {
+        if (prev.status < next.status) return -1;
+        else if (prev.status > next.status) return 1;
+        else return 0;
+      });
+
+    }
+    else if (this.sorting == true){
+      this.sorting = false;
+      this.persons.sort((prev,next) =>{
+        if (prev.status > next.status) return -1;
+        else if (prev.status < next.status) return 1;
+        else return 0;
+
+      });
+
+    }
+  }
+
 
   ngOnInit(): void {
     this.takeInfo();

@@ -40,7 +40,7 @@ import { ModerpersonsComponent } from './moderator/moderpersons/moderpersons.com
 import { AdmindashboardComponent } from './admin/admindashboard/admindashboard.component';
 import { ModerdashboardComponent } from './moderator/moderdashboard/moderdashboard.component';
 
-
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 @NgModule({
   schemas: [
@@ -82,6 +82,7 @@ import { ModerdashboardComponent } from './moderator/moderdashboard/moderdashboa
     FormsModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    FilterPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
