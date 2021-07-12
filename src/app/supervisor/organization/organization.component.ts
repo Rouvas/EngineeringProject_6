@@ -13,6 +13,8 @@ export class OrganizationComponent implements OnInit {
   constructor(private srv: SrvService, private modalService: BsModalService) { }
   modalRef: BsModalRef;
 
+  componentFilter: any = { name: '', phone: '' };
+
   organizations = [];
   persons = [];
 
@@ -32,6 +34,31 @@ export class OrganizationComponent implements OnInit {
     workers: -1,
     id: -1,
   };
+
+  sorting = false;
+
+  useSorting(){
+    console.log(this.sorting)
+    if (this.sorting == false){
+      this.sorting = true;
+      this.organizations.sort((prev, next ) => {
+        if (prev.name < next.name) return -1;
+        else if (prev.name > next.name) return 1;
+        else return 0;
+      });
+
+    }
+    else if (this.sorting == true){
+      this.sorting = false;
+      this.organizations.sort((prev,next) =>{
+        if (prev.name > next.name) return -1;
+        else if (prev.name < next.name) return 1;
+        else return 0;
+
+      });
+
+    }
+  }
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);

@@ -16,14 +16,19 @@
     <table class="uk-table uk-table-divider uk-table-hover">
       <thead>
       <tr>
-        <th>Ф.И.О</th>
+        <th>Ф.И.О <a (click)="useSortingName()">⇅</a></th>
         <th>Дата и время начала работы</th>
         <th>Дата и время окончания работы</th>
         <th>Действие</th>
-      </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let worktime of worktimes">
+      <tr>
+        <td><input class="uk-input" type="text" placeholder="Фильтрация по Ф.И.О" [(ngModel)]="componentFilter.cred"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr *ngFor="let worktime of worktimes | filterBy: componentFilter">
         <td>{{worktime.cred}}</td>
         <td>{{worktime.start_from}}</td>
         <td>{{worktime.ended_at}}</td>

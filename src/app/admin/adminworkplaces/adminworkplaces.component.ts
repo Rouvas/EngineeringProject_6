@@ -14,6 +14,7 @@ export class AdminworkplacesComponent implements OnInit {
   organizations = [];
   persons = [];
   workplaces = [];
+  componentFilter: any = { name: '', orgname: '' };
 
   // @ts-ignore
   openworkplace = {
@@ -27,6 +28,56 @@ export class AdminworkplacesComponent implements OnInit {
     organization: 1,
     name: ''
   };
+
+  sorting = false;
+
+  sorting2 = false;
+
+  useSorting(){
+    console.log(this.sorting)
+    if (this.sorting == false){
+      this.sorting = true;
+      this.workplaces.sort((prev, next ) => {
+        if (prev.name < next.name) return -1;
+        else if (prev.name > next.name) return 1;
+        else return 0;
+      });
+
+    }
+    else if (this.sorting == true){
+      this.sorting = false;
+      this.workplaces.sort((prev,next) =>{
+        if (prev.name > next.name) return -1;
+        else if (prev.name < next.name) return 1;
+        else return 0;
+
+      });
+
+    }
+  }
+
+  useSorting2(){
+    console.log(this.sorting)
+    if (this.sorting == false){
+      this.sorting = true;
+      this.workplaces.sort((prev, next ) => {
+        if (prev.orgname < next.orgname) return -1;
+        else if (prev.orgname > next.orgname) return 1;
+        else return 0;
+      });
+
+    }
+    else if (this.sorting == true){
+      this.sorting = false;
+      this.workplaces.sort((prev,next) =>{
+        if (prev.orgname > next.orgname) return -1;
+        else if (prev.orgname < next.orgname) return 1;
+        else return 0;
+
+      });
+
+    }
+  }
 
 
 

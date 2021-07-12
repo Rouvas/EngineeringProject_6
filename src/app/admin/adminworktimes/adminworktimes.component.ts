@@ -18,6 +18,8 @@ export class AdminworktimesComponent implements OnInit {
   selectedPerson;
   selectedOrg;
 
+  componentFilter: any = { cred: '' };
+
   organizations = [];
   persons = [];
   workplaces = [];
@@ -35,6 +37,30 @@ export class AdminworktimesComponent implements OnInit {
 
   c1 = [];
 
+
+  sorting = false;
+
+  useSortingName() {
+    if (this.sorting === false) {
+      this.sorting = true;
+      this.persons.sort((prev, next ) => {
+        if (prev.cred < next.cred) return -1;
+        else if (prev.cred > next.cred) return 1;
+        else return 0;
+      });
+
+    }
+    else if (this.sorting == true){
+      this.sorting = false;
+      this.persons.sort((prev,next) =>{
+        if (prev.cred > next.cred) return -1;
+        else if (prev.cred < next.cred) return 1;
+        else return 0;
+
+      });
+
+    }
+  }
 
 
   ngOnInit(): void {

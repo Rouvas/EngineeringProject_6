@@ -16,16 +16,24 @@
     <table class="uk-table uk-table-divider uk-table-hover">
       <thead>
       <tr>
-        <th>Ф.И.О.</th>
-        <th>Организация</th>
-        <th>Должность</th>
+        <th>Ф.И.О. <a (click)="useSortingName()">⇅</a></th>
+        <th>Организация <a (click)="useSortingOrganization()">⇅</a></th>
+        <th>Должность <a (click)="useSortingPost()">⇅</a></th>
         <th>Телефон</th>
-        <th>Статус</th>
+        <th>Статус <a (click)="useSortingStatus()">⇅</a></th>
         <th>Действие</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let person of persons">
+      <tr>
+        <td><input class="uk-input" type="text" placeholder="Фильтрация по Ф.И.О" [(ngModel)]="componentFilter.first_name"></td>
+        <td><input class="uk-input" type="text" placeholder="Фильтрация по организации" [(ngModel)]="componentFilter.orgname"></td>
+        <td><input class="uk-input" type="text" placeholder="Фильтрация по должности" [(ngModel)]="componentFilter.postname"></td>
+        <td><input class="uk-input" type="text" placeholder="Фильтрация по телефону" [(ngModel)]="componentFilter.phone"></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr *ngFor="let person of persons | filterBy: componentFilter">
         <td>{{person.last_name}} {{person.first_name}} {{person.middle_name}}</td>
         <td>{{person.orgname}}</td>
         <td>{{person.postname}}</td>

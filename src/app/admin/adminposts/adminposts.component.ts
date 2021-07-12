@@ -17,6 +17,8 @@ export class AdminpostsComponent implements OnInit {
   filteredworkplaces = [];
   posts = [];
 
+  componentFilter: any = { name: '', workplace: '', orgname: '' };
+
   // @ts-ignore
   openpost = {
     id: -1,
@@ -32,6 +34,81 @@ export class AdminpostsComponent implements OnInit {
     organization: 1,
     work_place: 1,
   };
+
+
+  sorting = false;
+
+  sorting2 = false;
+
+  sorting3 = false;
+
+  useSortingName(){
+    console.log(this.sorting)
+    if (this.sorting === false){
+      this.sorting = true;
+      this.posts.sort((prev, next ) => {
+        if (prev.name < next.name) return -1;
+        else if (prev.name > next.name) return 1;
+        else return 0;
+      });
+
+    }
+    else if (this.sorting == true){
+      this.sorting = false;
+      this.posts.sort((prev,next) =>{
+        if (prev.name > next.name) return -1;
+        else if (prev.name < next.name) return 1;
+        else return 0;
+
+      });
+
+    }
+  }
+
+  useSortingWorkplace(){
+    console.log(this.sorting)
+    if (this.sorting2 === false){
+      this.sorting2 = true;
+      this.posts.sort((prev, next ) => {
+        if (prev.workplace < next.workplace) return -1;
+        else if (prev.workplace > next.workplace) return 1;
+        else return 0;
+      });
+
+    }
+    else if (this.sorting === true){
+      this.sorting2 = false;
+      this.posts.sort((prev,next) =>{
+        if (prev.workplace > next.workplace) return -1;
+        else if (prev.workplace < next.workplace) return 1;
+        else return 0;
+
+      });
+
+    }
+  }
+
+  useSortingOrganization(){
+    if (this.sorting3 === false){
+      this.sorting3 = true;
+      this.posts.sort((prev, next ) => {
+        if (prev.orgname < next.orgname) return -1;
+        else if (prev.orgname > next.orgname) return 1;
+        else return 0;
+      });
+
+    }
+    else if (this.sorting == true){
+      this.sorting = false;
+      this.posts.sort((prev,next) =>{
+        if (prev.orgname > next.orgname) return -1;
+        else if (prev.orgname < next.orgname) return 1;
+        else return 0;
+
+      });
+
+    }
+  }
 
   onChangeEdit(value) {
     this.filteredworkplaces = [];

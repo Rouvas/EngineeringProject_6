@@ -11,6 +11,8 @@ import {Worktime} from '../../models/worktimemodel';
 export class ModerworktimesComponent implements OnInit {
   constructor(public srv: SrvService) { }
 
+  componentFilter: any = { cred: '' };
+
   // tslint:disable-next-line:variable-name
   public start_from = new Date();
   // tslint:disable-next-line:variable-name
@@ -36,7 +38,29 @@ export class ModerworktimesComponent implements OnInit {
 
   c1 = [];
 
+  sorting = false;
 
+  useSortingName() {
+    if (this.sorting === false) {
+      this.sorting = true;
+      this.persons.sort((prev, next ) => {
+        if (prev.cred < next.cred) return -1;
+        else if (prev.cred > next.cred) return 1;
+        else return 0;
+      });
+
+    }
+    else if (this.sorting == true){
+      this.sorting = false;
+      this.persons.sort((prev,next) =>{
+        if (prev.cred > next.cred) return -1;
+        else if (prev.cred < next.cred) return 1;
+        else return 0;
+
+      });
+
+    }
+  }
 
   ngOnInit(): void {
     this.takeInfo();
